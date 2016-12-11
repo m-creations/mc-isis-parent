@@ -10,7 +10,7 @@
 
 	<groupId>com.m-creations.isis</groupId>
 	<artifactId>mc-isis-parent</artifactId>
-	<version>1.13.0.3-SNAPSHOT</version>
+	<version>1.13.0.3</version>
 	<packaging>pom</packaging>
 
 	<name>m-creations Apache Isis parent POM</name>
@@ -54,7 +54,7 @@
 		<connection>scm:git:git@github.com:m-creations/mc-isis-parent.git</connection>
 		<developerConnection>scm:git:git@github.com:m-creations/mc-isis-parent.git</developerConnection>
 		<url>https://github.com/m-creations/mc-isis-parent</url>
-		<tag>HEAD</tag>
+		<tag>release-1.13.0.3</tag>
 	</scm>
 
 	<dependencyManagement>
