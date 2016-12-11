@@ -1,0 +1,812 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.m-creations</groupId>
+		<artifactId>mc-oss-parent</artifactId>
+		<version>1.1.14</version>
+	</parent>
+
+	<groupId>com.m-creations.isis</groupId>
+	<artifactId>mc-isis-parent</artifactId>
+	<version>1.13.0.3-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>m-creations Apache Isis parent POM</name>
+	<description>The base POM for all Apache Isis projects</description>
+	<url>https://github.com/m-creations/mc-isis-parent</url>
+
+	<prerequisites>
+		<maven>3.0.4</maven>
+	</prerequisites>
+
+	<properties>
+		<!-- the path to this project in Phabricator -->
+		<scm.path>mc-isis-parent</scm.path>
+
+		<!-- <isis.version>1.13.0-mc3</isis.version> -->
+		<!-- <isis.security.version>1.13.0-mc2</isis.security.version> -->
+
+		<version.isis>1.13.0</version.isis>
+		<version.isis.security>1.13.0</version.isis.security>
+
+		<version.isis.shiro>${version.isis}</version.isis.shiro>
+		<version.isis.excel>1.13.0</version.isis.excel>
+
+		<!-- <datanucleus-core.version>4.1.7-mc1</datanucleus-core.version> -->
+		<version.datanucleus-core>4.1.7</version.datanucleus-core>
+		<version.datanucleus-maven-plugin>5.0.0-release</version.datanucleus-maven-plugin>
+
+		<version.jbcrypt.mindrot>0.3m</version.jbcrypt.mindrot>
+		<version.assertj-core>2.0.0</version.assertj-core>
+		<version.oltu.apache>1.0.1</version.oltu.apache>
+		<version.jcifs>1.3.17</version.jcifs>
+		<version.poi>3.9</version.poi>
+		<version.flyway>4.0.1</version.flyway>
+
+		<version.slf4j>1.7.5</version.slf4j>
+		<version.apacheds>1.5.7</version.apacheds>
+
+		<version.tomcat-catalina>8.0.27</version.tomcat-catalina>
+
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+
+			<!-- contains base classes for all service implementations -->
+			<dependency>
+				<groupId>com.mcreations.common</groupId>
+				<artifactId>services-common</artifactId>
+				<version>${version.services-common}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.isis.core</groupId>
+				<artifactId>isis-core-security-shiro</artifactId>
+				<version>${version.isis.shiro}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.datanucleus</groupId>
+						<artifactId>datanucleus-core</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+	
+			<dependency>
+				<groupId>org.datanucleus</groupId>
+				<artifactId>datanucleus-core</artifactId>
+				<version>${version.datanucleus-core}</version>
+			</dependency>
+	
+			<dependency>
+				<groupId>org.apache.isis.core</groupId>
+				<artifactId>isis</artifactId>
+				<version>${version.isis}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+	
+			<dependency>
+				<groupId>org.apache.isis.viewer</groupId>
+				<artifactId>isis-viewer-wicket-ui</artifactId>
+				<version>${version.isis}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.isis.viewer</groupId>
+				<artifactId>isis-viewer-wicket-impl</artifactId>
+				<version>${version.isis}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.assertj</groupId>
+				<artifactId>assertj-core</artifactId>
+				<version>${version.assertj-core}</version>
+			</dependency>
+	
+			<dependency>
+				<groupId>org.isisaddons.module.security</groupId>
+				<artifactId>isis-module-security-dom</artifactId>
+				<version>${version.isis.security}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.datanucleus</groupId>
+						<artifactId>datanucleus-core</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.isisaddons.module.excel</groupId>
+				<artifactId>isis-module-excel-dom</artifactId>
+				<version>${version.isis.excel}</version>
+			</dependency>
+			<dependency>
+        <groupId>io.swagger</groupId>
+        <artifactId>swagger-inflector</artifactId>
+        <version>1.0.5</version>
+      </dependency>
+			<dependency>
+				<groupId>org.mindrot</groupId>
+				<artifactId>jbcrypt</artifactId>
+				<version>${version.jbcrypt.mindrot}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.oltu.oauth2</groupId>
+				<artifactId>org.apache.oltu.oauth2.client</artifactId>
+				<version>${version.oltu.apache}</version>
+			</dependency>
+			<dependency>
+				<groupId>jcifs</groupId>
+				<artifactId>jcifs</artifactId>
+				<version>${version.jcifs}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>javax.servlet</groupId>
+						<artifactId>servlet-api</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.httpcomponents</groupId>
+				<artifactId>httpclient</artifactId>
+				<version>4.5.2</version>
+			</dependency>
+
+			<dependency>
+				<groupId>commons-dbcp</groupId>
+				<artifactId>commons-dbcp</artifactId>
+				<version>1.4</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.tomcat</groupId>
+				<artifactId>tomcat-catalina</artifactId>
+				<version>${version.tomcat-catalina}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi</artifactId>
+				<version>${version.poi}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi-ooxml</artifactId>
+				<version>${version.poi}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi-ooxml-schemas</artifactId>
+				<version>${version.poi}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.googlecode.json-simple</groupId>
+				<artifactId>json-simple</artifactId>
+				<version>1.1</version>
+			</dependency>
+
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${version.junit}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.powermock</groupId>
+				<artifactId>powermock-module-junit4</artifactId>
+				<version>${version.powermock}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.powermock</groupId>
+				<artifactId>powermock-api-mockito</artifactId>
+				<version>${version.powermock}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.powermock</groupId>
+				<artifactId>powermock-module-junit4-rule</artifactId>
+				<version>${version.powermock}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.powermock</groupId>
+				<artifactId>powermock-classloading-xstream</artifactId>
+				<version>${version.powermock}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<!-- Flyway for the database migrations -->
+			<dependency>
+				<groupId>org.flywaydb</groupId>
+				<artifactId>flyway-core</artifactId>
+				<version>${version.flyway}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.apache.derby</groupId>
+						<artifactId>derby</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.apache.derby</groupId>
+						<artifactId>derbyclient</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>com.h2database</groupId>
+						<artifactId>h2</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.hsqldb</groupId>
+						<artifactId>hsqldb</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>net.sourceforge.jtds</groupId>
+						<artifactId>jtds</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.mariadb.jdbc</groupId>
+						<artifactId>mariadb-java-client</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.postgresql</groupId>
+						<artifactId>postgresql</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.xerial</groupId>
+						<artifactId>sqlite-jdbc</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+
+			<!-- H2 in-memory database for integration testing -->
+			<dependency>
+				<groupId>com.h2database</groupId>
+				<artifactId>h2</artifactId>
+				<version>1.4.191</version>
+			</dependency>
+
+			<!-- ApacheDS as LDAP backend for integration testing -->
+      <dependency>
+        <groupId>org.apache.directory.server</groupId>
+        <artifactId>apacheds-core</artifactId>
+        <version>${version.apacheds}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.directory.server</groupId>
+        <artifactId>apacheds-server-integ</artifactId>
+        <version>${version.apacheds}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.directory.server</groupId>
+        <artifactId>apacheds-core-integ</artifactId>
+        <version>${version.apacheds}</version>
+      </dependency>
+
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${version.slf4j}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<!-- Apache Isis projects do contains resources in the java source subdir -->
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**</include>
+				</includes>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</resource>
+		</resources>
+
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-enforcer-plugin</artifactId>
+					<version>1.3.1</version>
+					<configuration>
+						<rules>
+							<requireMavenVersion>
+								<version>[3.2.1,)</version>
+							</requireMavenVersion>
+							<requireJavaVersion>
+								<version>[1.8.0,)</version>
+							</requireJavaVersion>
+							<requirePluginVersions>
+								<message>All plugin versions must be
+									defined!</message>
+								<banLatest>true</banLatest>
+								<banRelease>true</banRelease>
+							</requirePluginVersions>
+							<DependencyConvergence />
+						</rules>
+					</configuration>
+					<executions>
+						<execution>
+							<id>validate-enforce</id>
+							<phase>validate</phase>
+							<goals>
+								<goal>enforce</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<configuration>
+						<source>1.8</source>
+						<target>1.8</target>
+						<compilerArgument>-parameters</compilerArgument>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.datanucleus</groupId>
+					<artifactId>datanucleus-maven-plugin</artifactId>
+					<version>${version.datanucleus-maven-plugin}</version>
+					<configuration>
+						<fork>false</fork>
+						<log4jConfiguration>${basedir}/src/test/resources/log4j.properties</log4jConfiguration>
+						<verbose>true</verbose>
+						<props>${basedir}/src/test/resources/persistor_datanucleus.properties</props>
+					</configuration>
+					<executions>
+						<execution>
+							<phase>process-classes</phase>
+							<goals>
+								<goal>enhance</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.isis.tool</groupId>
+					<artifactId>isis-maven-plugin</artifactId>
+					<version>${version.isis}</version>
+					<configuration>
+						<visibilities>
+							<visibility>PUBLIC</visibility>
+							<visibility>PRIVATE</visibility>
+						</visibilities>
+						<format>JSON</format>
+						<fileNamePrefix>swagger</fileNamePrefix>
+					</configuration>
+					<dependencies>
+						<!--
+								... workaround to avoid conflict with plexus-default
+								(not sure why exclusions in the isis-maven-plugin aren't sufficient, though ...
+						-->
+						<dependency>
+							<groupId>com.google.guava</groupId>
+							<artifactId>guava</artifactId>
+							<version>19.0</version>
+						</dependency>
+						<!-- used by isis-maven-plugin swagger goal -->
+						<dependency>
+							<groupId>org.hsqldb</groupId>
+							<artifactId>hsqldb</artifactId>
+							<version>2.3.1</version>
+						</dependency>
+					</dependencies>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-javadoc-plugin</artifactId>
+					<configuration>
+						<doclet>org.asciidoctor.Asciidoclet</doclet>
+						<docletArtifacts>
+							<docletArtifact>
+								<groupId>org.asciidoctor</groupId>
+								<artifactId>asciidoclet</artifactId>
+								<version>1.5.4.mc1</version>
+							</docletArtifact>
+						</docletArtifacts>
+						<overview>${project.basedir}/src/main/asciidoc/javadoc-overview.adoc</overview>
+						<additionalparam>
+							--require asciidoctor-diagram
+							--base-dir ${project.basedir}/..
+							--attribute data-uri
+							--attribute "icons=font"
+							--attribute "name=${project.name}"
+							--attribute "version=${project.version}"
+							--attribute "title-link=http://doc.m-creations.net/docs/[${project.name} ${project.version}]"
+						</additionalparam>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<!--This plugin's configuration is used to store Eclipse m2e settings 
+							only. It has no influence on the Maven build itself. -->
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.datanucleus</groupId>
+										<artifactId>datanucleus-maven-plugin</artifactId>
+										<versionRange>[${version.datanucleus-maven-plugin},)</versionRange>
+										<goals>
+											<goal>enhance</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+   							<pluginExecution>
+   								<pluginExecutionFilter>
+   									<groupId>org.codehaus.mojo</groupId>
+   									<artifactId>exec-maven-plugin</artifactId>
+   									<versionRange>[1.1.1,)</versionRange>
+   									<goals>
+   										<goal>exec</goal>
+   									</goals>
+   								</pluginExecutionFilter>
+   								<action>
+   									<ignore></ignore>
+   								</action>
+   							</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<profiles>
+
+		<profile>
+			<id>datanucleus-enhance</id>
+			<activation>
+				<file>
+					<exists>src/main/java</exists>
+				</file>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.datanucleus</groupId>
+						<artifactId>datanucleus-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<phase>process-classes</phase>
+								<goals>
+									<goal>enhance</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+			<dependencies>
+				<dependency>
+					<groupId>org.datanucleus</groupId>
+					<artifactId>datanucleus-core</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>isis-validate</id>
+			<activation>
+				<file>
+					<exists>src/main/resources/db/migration</exists>
+				</file>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.isis.tool</groupId>
+						<artifactId>isis-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<phase>test</phase>
+								<goals>
+									<goal>validate</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
+			<id>isis-swagger</id>
+			<activation>
+				<file>
+					<exists>src/test/resources/swagger</exists>
+				</file>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.isis.tool</groupId>
+						<artifactId>isis-maven-plugin</artifactId>
+						<version>${version.isis}</version>
+						<configuration>
+							<visibilities>
+								<visibility>PUBLIC</visibility>
+								<visibility>PRIVATE</visibility>
+							</visibilities>
+							<format>JSON</format>
+							<fileNamePrefix>swagger</fileNamePrefix>
+						</configuration>
+						<dependencies>
+							<!--
+									... workaround to avoid conflict with plexus-default
+									(not sure why exclusions in the isis-maven-plugin aren't sufficient, though ...
+							-->
+							<dependency>
+								<groupId>com.google.guava</groupId>
+								<artifactId>guava</artifactId>
+								<version>19.0</version>
+							</dependency>
+							<!-- used by isis-maven-plugin swagger goal -->
+							<dependency>
+								<groupId>org.hsqldb</groupId>
+								<artifactId>hsqldb</artifactId>
+								<version>2.3.1</version>
+							</dependency>
+						</dependencies>
+						<executions>
+							<execution>
+								<phase>initialize</phase>
+								<goals>
+									<goal>swagger</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>io.swagger</groupId>
+						<artifactId>swagger-codegen-maven-plugin</artifactId>
+						<version>2.1.6</version>
+						<executions>
+							<execution>
+								<goals>
+									<goal>generate</goal>
+								</goals>
+								<configuration>
+									<inputSpec>${project.build.directory}/generated-resources/isis-swagger/swagger-PRIVATE.json</inputSpec>
+									<language>java</language>
+									<library>jersey2</library>
+									<apiPackage>${project.groupId}.client.api</apiPackage>
+									<modelPackage>${project.groupId}.client.model</modelPackage>
+									<invokerPackage>${project.groupId}.client.invoke</invokerPackage>
+									<configOptions>
+                    <sourceFolder>src/main/java</sourceFolder>
+                    <groupId>${project.groupId}</groupId>
+                    <artifactId>${project.artifactId}-client</artifactId>
+                    <artifactVersion>${project.version}</artifactVersion>
+                    <sortParamsByRequiredFlag>true</sortParamsByRequiredFlag>
+                    <serializableModel>true</serializableModel>
+                    <dateLibrary>java8</dateLibrary>
+									</configOptions>
+								</configuration>
+							</execution>
+						</executions>
+						<dependencies>
+							<!-- inflector library -->
+							<dependency>
+								<groupId>io.swagger</groupId>
+								<artifactId>swagger-inflector</artifactId>
+								<version>1.0.2</version>
+							</dependency>
+						</dependencies>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+			<!--
+					Enhanced cucumber reporting per http://www.masterthought.net/section/cucumber-reporting
+					-
+					The profile is activated, if a file src/test/resources/generate-cucumber-report is present 
+			-->
+		<profile>
+			<id>cucumber-reporting</id>
+			<activation>
+				<file>
+					<exists>${basedir}/src/test/resources/generate-cucumber-report</exists>
+				</file>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+					</plugin>
+					<plugin>
+						<groupId>net.masterthought</groupId>
+						<artifactId>maven-cucumber-reporting</artifactId>
+						<version>0.0.4</version>
+						<executions>
+							<execution>
+								<id>execution</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>generate</goal>
+								</goals>
+								<configuration>
+									<projectName>cucumber-jvm-example</projectName>
+									<outputDirectory>${project.build.directory}/cucumber-reports</outputDirectory>
+									<cucumberOutput>${project.build.directory}/cucumber.json</cucumberOutput>
+									<enableFlashCharts>false</enableFlashCharts>
+								</configuration>
+							</execution>
+						</executions>
+						<dependencies>
+							<dependency>
+								<groupId>com.googlecode.totallylazy</groupId>
+								<artifactId>totallylazy</artifactId>
+								<version>1.46</version>
+							</dependency>
+						</dependencies>
+					</plugin>
+				</plugins>
+			</build>
+			<dependencies>
+				<dependency>
+					<groupId>com.googlecode.totallylazy</groupId>
+					<artifactId>totallylazy</artifactId>
+					<version>1.46</version>
+				</dependency>
+				<dependency>
+					<groupId>net.masterthought</groupId>
+					<artifactId>cucumber-reporting</artifactId>
+					<version>0.0.21</version>
+				</dependency>
+				<dependency>
+					<groupId>net.masterthought</groupId>
+					<artifactId>maven-cucumber-reporting</artifactId>
+					<version>0.0.4</version>
+					<exclusions>
+						<exclusion>
+							<groupId>com.googlecode.totallylazy</groupId>
+							<artifactId>totallylazy</artifactId>
+						</exclusion>
+					</exclusions>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>self-host</id>
+			<build>
+				<plugins>
+					<!-- mvn -Dself-host antrun:run -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<configuration>
+							<tasks>
+								<exec executable="java" failonerror="true">
+									<arg value="-jar" />
+									<arg value="${project.build.directory}/${project.build.finalName}-jetty-console.jar" />
+								</exec>
+							</tasks>
+						</configuration>
+						<dependencies>
+							<dependency>
+								<groupId>javax.websocket</groupId>
+								<artifactId>javax.websocket-api</artifactId>
+								<version>1.0</version>
+							</dependency>
+						</dependencies>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
+			<id>intellij</id>
+			<activation>
+				<property>
+					<name>idea.version</name>
+				</property>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>org.apache.geronimo.specs</groupId>
+					<artifactId>geronimo-servlet_3.0_spec</artifactId>
+					<!-- Use 'compile' so can run o.a.i.WebServer from within IntelliJ;
+							 can rely on servlet container to ignore this in war file -->
+					<scope>compile</scope>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>m2e</id>
+			<activation>
+				<property>
+					<name>m2e.version</name>
+				</property>
+			</activation>
+			<build>
+				<directory>target</directory>
+			</build>
+		</profile>
+
+		<profile>
+			<id>jrebel</id>
+			<properties>
+				<!-- as used in the rebel.xml in the dom project -->
+				<target.dir>target</target.dir>
+				<isis-jrebel-plugin.packagePrefix>dom.simple,org.apache.isis.objectstore.jdo.applib</isis-jrebel-plugin.packagePrefix>
+				<isis-jrebel-plugin.loggingLevel>warn</isis-jrebel-plugin.loggingLevel>
+			</properties>
+			<build>
+				<plugins>
+					<!-- mvn -P jrebel antrun:run \ -Djrebel.jar="C:/Users/Dan/.IdeaIC13/config/plugins/jr-ide-idea/lib/jrebel/jrebel.jar"
+							 \ -Disis_jrebel_plugin.jar="C:/github/danhaywood/isis-jrebel-plugin/target/danhaywood-isis-jrebel-plugin-1.0.0-SNAPSHOT.jar" -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<configuration>
+							<target>
+								<property name="compile_classpath" refid="maven.compile.classpath" />
+								<property name="runtime_classpath" refid="maven.runtime.classpath" />
+								<property name="test_classpath" refid="maven.test.classpath" />
+								<property name="plugin_classpath" refid="maven.plugin.classpath" />
+								<echo message="" />
+								<echo message="" />
+								<echo message="jrebel.jar = ${jrebel.jar}" />
+								<echo message="isis_jrebel_plugin.jar = ${isis_jrebel_plugin.jar}" />
+								<echo message="target.dir = ${target.dir}" />
+								<echo message="" />
+								<echo message="" />
+								<exec executable="java" failonerror="true">
+									<arg value="-javaagent:${jrebel.jar}" />
+									<arg value="-Drebel.log=false" />
+									<arg value="-Drebel.check_class_hash=true" />
+									<arg value="-Drebel.packages_exclude=org.apache.isis" />
+									<!-- as used in the rebel.xml in the dom project -->
+									<arg value="-Dproject.root=${project.basedir}/.." />
+									<arg value="-Dtarget.dir=${target.dir}" />
+									<arg value="-Drebel.plugins=${isis_jrebel_plugin.jar}" />
+									<arg value="-Disis-jrebel-plugin.packagePrefix=${isis-jrebel-plugin.packagePrefix}" />
+									<arg value="-Disis-jrebel-plugin.loggingLevel=${isis-jrebel-plugin.loggingLevel}" />
+									<arg value="-XX:MaxPermSize=128m" />
+									<arg value="-classpath" />
+									<arg value="${runtime_classpath}" />
+									<arg value="org.apache.isis.WebServer" />
+								</exec>
+							</target>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+	</profiles>
+
+</project>
+
+
+<!-- Local Variables: -->
+<!-- mode:nxml -->
+<!-- nxml-child-indent:2 -->
+<!-- tab-width:2 -->
+<!-- indent-tabs-mode:t -->
+<!-- End: -->
